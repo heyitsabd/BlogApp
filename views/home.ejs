@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./partials/head') %>
+    <title>Homepage</title>
+  </head>
+  <body>
+   
+    <% if (locals.user) { %>
+      <%- include('./partials/nav') %>
+      <div class="container mt-3" >
+        <div class="row row-cols-4">
+          <% blogs.forEach(blog => { %>
+          <div class="col">
+            <div class="card col" style="width: 18rem" >
+              <img src="<%= blog.coverImage %>" class="card-img-top" style="height: 200px;"  />
+              <div class="card-body">
+                <h5 class="card-title" style="height: 60px; overflow: hidden; text-overflow: ellipsis;"><%= blog.title %></h5>
+                <a href="/blog/<%= blog._id %>" class="btn btn-primary">View</a>
+              </div>
+            </div>
+          </div>
+          <% }) %>
+        </div>
+      </div>
+  
+    <% } else {%>
+      <div class="alert alert-primary" role="alert">
+       Please LogIn first.
+      </div>
+      <%- include('./signin') %>
+      <%} %>
+    
+    <%- include('./partials/scripts') %>
+  </body>
+</html>
